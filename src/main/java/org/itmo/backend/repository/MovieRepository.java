@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -56,14 +57,14 @@ public class MovieRepository {
                             year = :year,
                             director = :director,
                             length = :length,
-                            rating = :rating,
+                            rating = :rating
                         where id = :movieId
                         """,
                 Map.of("movieId", movie.getId(),
                         "title", movie.getTitle(),
                         "year", movie.getYear(),
                         "director", movie.getDirector(),
-                        "length", movie.getLength(),
+                        "length", Time.valueOf(movie.getLength()),
                         "rating", movie.getRating()));
     }
 
