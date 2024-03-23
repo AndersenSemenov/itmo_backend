@@ -64,7 +64,7 @@ public class MovieController {
                     .append(constraint.getPropertyPath())
                     .append(" ")
                     .append(constraint.getMessage())
-                    .append(" \n");
+                    .append("; ");
         }
 
         throw new ValidationException(builder.toString());

@@ -60,10 +60,11 @@ public class DirectorController {
 
         StringBuilder builder = new StringBuilder();
         for (var constraint : constraints) {
-            builder.append("Field ")
+            builder.append("Поле ")
                     .append(constraint.getPropertyPath())
                     .append(" ")
-                    .append(constraint.getMessage());
+                    .append(constraint.getMessage())
+                    .append(" ;");
         }
 
         throw new ValidationException(builder.toString());
