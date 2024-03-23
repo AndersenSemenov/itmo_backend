@@ -1,9 +1,9 @@
 package org.itmo.backend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.itmo.backend.dto.director.DirectorApiDto;
 import org.itmo.backend.dto.director.DirectorDto;
 import org.itmo.backend.dto.director.DirectorList;
-import org.itmo.backend.dto.director.DirectorApiDto;
 import org.itmo.backend.exception.RecordNotFoundException;
 import org.itmo.backend.repository.DirectorRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 public class DirectorService {
 
     private final DirectorRepository directorRepository;
-
+    public static final String DIRECTOR_NOT_FOUND_ERROR_MESSAGE = "Не найден режиссер по id=";
 
     public boolean existsById(Long directorId) {
         return directorRepository.existsById(directorId) > 0;
@@ -27,8 +27,8 @@ public class DirectorService {
     }
 
     public DirectorApiDto getDirectorById(Long directorId) {
-        DirectorDto director =  directorRepository.findById(directorId)
-                .orElseThrow(() -> new RecordNotFoundException("Не найден режиссер по id=" + directorId));
+        DirectorDto director = directorRepository.findById(directorId)
+                .orElseThrow(() -> new RecordNotFoundException(DIRECTOR_NOT_FOUND_ERROR_MESSAGE + directorId));
         return new DirectorApiDto(director);
     }
 
@@ -42,14 +42,14 @@ public class DirectorService {
     public DirectorApiDto updateDirector(DirectorApiDto directorApiDto) {
         DirectorDto director = directorApiDto.getDirector();
         if (directorRepository.updateDirector(director) == 0) {
-            throw new RecordNotFoundException("Не найден режиссер по id=" + director.getId());
+            throw new RecordNotFoundException(DIRECTOR_NOT_FOUND_ERROR_MESSAGE + director.getId());
         }
         return new DirectorApiDto(director);
     }
 
     public void deleteById(Long directorId) {
         if (directorRepository.deleteById(directorId) == 0) {
-            throw new RecordNotFoundException("Не найден режиссер по id=" + directorId);
+            throw new RecordNotFoundException(DIRECTOR_NOT_FOUND_ERROR_MESSAGE + directorId);
         }
     }
 }
