@@ -1,3 +1,5 @@
+Решение опубликовано на github и доступно по ссылке https://github.com/AndersenSemenov/itmo_backend
+
 Для запуска необходимо поднять базу Postgres, перейдя в папку docker-compose и выполнив команду docker-compose up -d 
 
 При запуске main метода в классе Main стартует веб-приложение на Spring Boot на дефолтном порту 8080, приложение будет доступно по адресу http://localhost:8080
