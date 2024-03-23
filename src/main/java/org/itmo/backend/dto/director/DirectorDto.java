@@ -14,7 +14,7 @@ public class DirectorDto {
     @NotNull
     private Long id;
 
-    @Length(max = 100, message = "maximum range is 100")
+    @Length(max = 100)
     @NotBlank
     private String fio;
 }
